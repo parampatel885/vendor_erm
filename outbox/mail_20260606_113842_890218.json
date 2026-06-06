@@ -1,0 +1,9 @@
+{
+  "to": "sales@furnitureltd.com",
+  "from": "noreply@vendorbridge.com",
+  "subject": "[VendorBridge] Purchase Order Dispatched: PO-2026-002",
+  "body": "\n            <div style=\"font-family: Arial, sans-serif; padding: 20px; color: #1E1815; background-color: #FAF9F6; border: 1px solid #D3C9C0;\">\n                <h2 style=\"color: #8A2E0E; border-bottom: 2px solid #8A2E0E; padding-bottom: 8px;\">Purchase Order Dispatched</h2>\n                <p>Hello <strong>Rohan Mehta</strong>,</p>\n                <p>Please find attached the official purchase contract for <strong>Workspace Desks</strong>.</p>\n                <table style=\"width: 100%; border-collapse: collapse; margin: 15px 0;\">\n                    <tr>\n                        <td style=\"padding: 8px; border: 1px solid #D3C9C0; font-weight: bold; background: #EFECE7;\">Purchase Order</td>\n                        <td style=\"padding: 8px; border: 1px solid #D3C9C0; font-weight: bold; color: #8A2E0E;\">PO-2026-002</td>\n                    </tr>\n                    <tr>\n                        <td style=\"padding: 8px; border: 1px solid #D3C9C0; font-weight: bold; background: #EFECE7;\">Total Amount</td>\n                        <td style=\"padding: 8px; border: 1px solid #D3C9C0; font-weight: bold; color: #1E5C3F;\">$8,850.00</td>\n                    </tr>\n                </table>\n                <p>Please deliver as per agreed schedules.</p>\n                <hr style=\"border: 0; border-top: 1px solid #D3C9C0; margin-top: 20px;\" />\n                <p style=\"font-size: 11px; color: #6B5E55;\">Regards,<br/>VendorBridge Corporate Desk</p>\n            </div>\n        ",
+  "timestamp": "2026-06-06T11:38:42.890256",
+  "smtp_tried": false,
+  "smtp_error": ""
+}

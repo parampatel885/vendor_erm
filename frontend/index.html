@@ -1,0 +1,1343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VendorBridge - Decentralized Procurement ERP</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ========================================================== -->
+    <!-- 1. LOGIN & SIGNUP SCREEN (SCREEN 1 & 2 OVERLAY)           -->
+    <!-- ========================================================== -->
+    <div id="login-container">
+        
+        <!-- ==================== LOGIN CARD VIEW ==================== -->
+        <div class="login-card" id="login-card-view" style="display: none;">
+            <div class="login-header">
+                <!-- User Avatar in circle per mockup -->
+                <div style="display: flex; justify-content: center; margin-bottom: 20px;">
+                    <div style="width: 80px; height: 80px; border-radius: 50%; border: 1px solid var(--border-color); overflow: hidden; background: #E7E3DD; display: flex; align-items: center; justify-content: center;">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color: var(--text-secondary); margin-top: 6px;">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                    </div>
+                </div>
+                <h2>VendorBridge</h2>
+                <p>— PROCUREMENT ERP —</p>
+            </div>
+            
+            <form id="login-form" onsubmit="event.preventDefault(); handleLogin();">
+                <div class="form-group">
+                    <label for="login-email">User Identity</label>
+                    <input type="email" id="login-email" class="form-control" placeholder="Enter registration name or email" required value="officer@vendorbridge.com">
+                </div>
+                
+                <div class="form-group">
+                    <label for="login-password">Security Key <a href="#" class="label-right-link" onclick="showToast('Reset Key', 'Password reset instructions dispatched to your registry.', 'info')">reset access</a></label>
+                    <input type="password" id="login-password" class="form-control" placeholder="••••••••" required value="password123">
+                </div>
+                
+                <button type="submit" class="btn-primary" style="margin-top: 10px;">Access Terminal ➔</button>
+            </form>
+            
+            <div class="login-footer-text" style="margin-top: 20px; border-top: 1px dashed var(--border-color); padding-top: 15px;">
+                <p style="font-weight: 700; margin-bottom: 6px; font-family: var(--font-mono); font-size: 11px;">REGISTERED DEMO USERS:</p>
+                <div style="font-size: 11px; text-align: left; background: var(--bg-card-hover); padding: 8px; border: 1px solid var(--border-color); border-radius: var(--border-radius); line-height: 1.5; font-family: var(--font-mono); color: var(--text-secondary);">
+                    • Officer: officer@vendorbridge.com<br>
+                    • Vendor: sales@dhirajfurniture.in<br>
+                    • Manager: approver.manager@vendorbridge.com<br>
+                    • Admin: admin@vendorbridge.com<br>
+                    • Password: password123
+                </div>
+                <p style="margin-top: 14px; font-family: var(--font-sans); font-size: 13px; text-transform: none;">
+                    Need to register? <a href="#" onclick="toggleLoginView('signup')" style="text-decoration: underline;">Sign Up</a>
+                </p>
+            </div>
+        </div>
+
+        <!-- ==================== SIGNUP CARD VIEW ==================== -->
+        <div class="login-card" id="signup-card-view" style="max-width: 540px;">
+            <div class="login-header">
+                <h2 style="font-size: 28px;">Create Account</h2>
+                <p>Join the VendorBridge Procurement Network</p>
+            </div>
+            
+            <form id="signup-form" onsubmit="event.preventDefault(); handleRegister();">
+                <!-- Profile photo placeholder -->
+                <div class="profile-photo-selector">
+                    <div class="photo-circle">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--text-muted);"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+                        <div class="photo-badge">
+                            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                        </div>
+                    </div>
+                    <span style="font-size: 9px; font-family: var(--font-mono); margin-top: 8px; text-transform: uppercase; color: var(--text-muted);">Profile Photo</span>
+                </div>
+
+                <div class="input-grid-2">
+                    <div class="form-group">
+                        <label for="signup-firstname">First Name</label>
+                        <input type="text" id="signup-firstname" class="form-control" placeholder="Enter first name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-lastname">Last Name</label>
+                        <input type="text" id="signup-lastname" class="form-control" placeholder="Enter last name" required>
+                    </div>
+                </div>
+
+                <div class="input-grid-2">
+                    <div class="form-group">
+                        <label for="signup-email">Email Address</label>
+                        <input type="email" id="signup-email" class="form-control" placeholder="email@company.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-phone">Phone Number</label>
+                        <input type="tel" id="signup-phone" class="form-control" placeholder="e.g. +91 98765 43210" required>
+                    </div>
+                </div>
+
+                <div class="input-grid-2">
+                    <div class="form-group">
+                        <label for="signup-role">Role</label>
+                        <select id="signup-role" class="form-control" style="background-color: var(--bg-input);" onchange="toggleSignupVendorCategory(this.value)">
+                            <option value="" disabled selected>Select your role</option>
+                            <option value="officer">Procurement Officer</option>
+                            <option value="vendor">Supplier / Vendor</option>
+                            <option value="manager">Approver Manager</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-country">Country</label>
+                        <select id="signup-country" class="form-control" style="background-color: var(--bg-input);">
+                            <option value="" disabled selected>Select country</option>
+                            <option value="India">India</option>
+                            <option value="United States">United States</option>
+                            <option value="Singapore">Singapore</option>
+                            <option value="Germany">Germany</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group" id="signup-vendor-category-group" style="display: none;">
+                    <label for="signup-vendor-category">Vendor Category (Only for Suppliers)</label>
+                    <select id="signup-vendor-category" class="form-control" style="background-color: var(--bg-input);">
+                        <option value="Furniture">Furniture & Fittings</option>
+                        <option value="IT Hardware">IT Hardware & Laptops</option>
+                        <option value="Stationery">Stationery & Office Supplies</option>
+                        <option value="Electronics">Security & Electronics</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="signup-additional">Additional Information</label>
+                    <textarea id="signup-additional" class="form-control" rows="3" style="resize:none;" placeholder="Briefly describe your procurement background..."></textarea>
+                </div>
+                
+                <button type="submit" class="btn-primary" style="margin-top: 10px; background: #1C1714;">Register ➔</button>
+            </form>
+            
+            <div class="login-footer-text" style="margin-top: 20px; padding-top: 16px;">
+                <p style="font-family: var(--font-sans); font-size: 13px; text-transform: none;">
+                    Already have an account? <a href="#" onclick="toggleLoginView('login')" style="text-decoration: underline;">Sign In</a>
+                </p>
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- ========================================================== -->
+    <!-- MAIN APPLICATION CONTAINER (ROUTING CANVAS)               -->
+    <!-- ========================================================== -->
+    <div id="app-container" style="display: none;">
+        
+        <!-- SIDEBAR NAVIGATION -->
+        <aside class="sidebar" id="sidebar">
+            <div class="logo-section">
+                <span class="logo-text">Vendor<span class="logo-accent">Bridge</span></span>
+            </div>
+            
+            <ul class="nav-links">
+                <li class="nav-item" id="nav-dashboard">
+                    <a href="#" onclick="switchScreen('dashboard')">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item" id="nav-users">
+                    <a href="#" onclick="switchScreen('users')">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+                        <span>Users</span>
+                    </a>
+                </li>
+                <li class="nav-item" id="nav-vendors">
+                    <a href="#" onclick="switchScreen('vendors')">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                        <span>Vendors</span>
+                    </a>
+                </li>
+                <li class="nav-item" id="nav-rfqs">
+                    <a href="#" onclick="switchScreen('rfqs')">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+                        <span>RFQ's</span>
+                    </a>
+                </li>
+                <li class="nav-item" id="nav-quotations">
+                    <a href="#" onclick="switchScreen('quotations')">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                        <span>Quotations</span>
+                    </a>
+                </li>
+                <li class="nav-item" id="nav-approvals">
+                    <a href="#" onclick="switchScreen('approvals')">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                        <span>Approvals</span>
+                    </a>
+                </li>
+                <li class="nav-item" id="nav-purchaseorders">
+                    <a href="#" onclick="switchScreen('purchaseorders')">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M12 8v8"/><path d="M8 12h8"/></svg>
+                        <span>Purchase Order</span>
+                    </a>
+                </li>
+                <li class="nav-item" id="nav-invoices">
+                    <a href="#" onclick="switchScreen('invoices')">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                        <span>Invoices</span>
+                    </a>
+                </li>
+                <li class="nav-item" id="nav-reports">
+                    <a href="#" onclick="switchScreen('reports')">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                        <span>Reports</span>
+                    </a>
+                </li>
+                <li class="nav-item" id="nav-activity">
+                    <a href="#" onclick="switchScreen('activity')">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                        <span>Activity</span>
+                    </a>
+                </li>
+            </ul>
+            
+            <div class="user-quick-profile">
+                <div class="avatar" id="sidebar-avatar">PO</div>
+                <div class="profile-info">
+                    <div class="profile-name" id="sidebar-user-name">Procurement Team</div>
+                    <div class="profile-role" id="sidebar-user-role">Officer</div>
+                </div>
+                <button onclick="handleLogout()" style="margin-left: auto; color: var(--color-danger);">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                </button>
+            </div>
+        </aside>
+
+        <!-- MAIN MAIN CONTENT canvas -->
+        <main class="main-area">
+            
+            <!-- TOP HEADER SECTION -->
+            <header class="top-header">
+                <div class="header-left">
+                    <button class="mobile-menu-btn" onclick="toggleSidebar()">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                    </button>
+                    <h1 id="page-title">Dashboard</h1>
+                </div>
+                
+                <div class="header-actions">
+                    
+                    <!-- Notification Bell -->
+                    <div style="position: relative; display: flex; align-items: center;">
+                        <button class="icon-btn" onclick="toggleNotifications()">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                            <span class="icon-badge" id="notifications-count">3</span>
+                        </button>
+                        
+                        <!-- Notifications Dropdown -->
+                        <div class="dropdown-panel" id="notifications-dropdown">
+                            <div class="dropdown-header">
+                                <h4>Notifications</h4>
+                                <button onclick="clearNotifications(event)" style="font-size: 11px; color: var(--color-primary);">Mark read</button>
+                            </div>
+                            <div class="dropdown-body" id="notifications-list">
+                                <!-- Loaded dynamically via JS -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Profile Pill -->
+                    <div class="profile-pill">
+                        <div class="avatar" id="header-avatar">PO</div>
+                        <div class="profile-info">
+                            <span class="profile-name" id="header-user-name">Jainish Patel</span>
+                            <span class="profile-role" id="header-user-role">Procurement Officer</span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            
+            <div class="content-canvas">
+                
+                <!-- ========================================================== -->
+                <!-- SCREEN 2: DASHBOARD / HOME                                -->
+                <!-- ========================================================== -->
+                <section id="screen-dashboard" class="screen-view active">
+                    <div class="dashboard-stats" id="dashboard-kpis">
+                        <!-- Loaded dynamically via JS -->
+                    </div>
+                    
+                    <div class="dashboard-grid">
+                        <div class="dashboard-panel">
+                            <div class="panel-header" style="flex-wrap: wrap; gap: 12px; margin-bottom: 16px;">
+                                <h2 class="panel-title">Active Requests for Quotation (RFQs)</h2>
+                                <a href="#" onclick="switchScreen('rfqs')" class="panel-link">View all RFQs</a>
+                            </div>
+                            
+                            <!-- Search & Filter for Dashboard Active RFQs -->
+                            <div style="display: flex; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; align-items: center;">
+                                <div style="flex: 1; min-width: 200px; position: relative;">
+                                    <input type="text" id="dashboard-rfq-search" class="form-control" style="padding-left: 36px; padding-top: 8px; padding-bottom: 8px; font-size: 13px;" placeholder="Search active RFQs..." oninput="filterDashboardRFQs()">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-secondary);"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                                </div>
+                                <div style="width: 140px;">
+                                    <select id="dashboard-rfq-status" class="form-control" style="background-color: var(--bg-input); padding-left: 10px; padding-top: 8px; padding-bottom: 8px; font-size: 13px; height: 38px;" onchange="filterDashboardRFQs()">
+                                        <option value="All">All Statuses</option>
+                                        <option value="Bidding">Bidding</option>
+                                        <option value="Comparison">Comparison</option>
+                                        <option value="Approved">Approved</option>
+                                        <option value="Closed">Closed</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="table-container">
+                                <table class="custom-table">
+                                    <thead>
+                                        <tr>
+                                            <th>RFQ ID</th>
+                                            <th>RFQ Title</th>
+                                            <th>Items Required</th>
+                                            <th>Closing Date</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="dashboard-rfqs-list">
+                                        <!-- Loaded dynamically via JS -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        
+                        <div class="dashboard-panel" id="dashboard-actions-panel" style="display: flex; flex-direction: column; justify-content: space-between;">
+                            <div>
+                                <div class="panel-header">
+                                    <h2 class="panel-title">Quick Actions</h2>
+                                </div>
+                                <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 10px;">
+                                    <button class="btn-primary btn-icon-label" id="quick-create-rfq-btn" onclick="showCreateRFQForm();">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                                        Create New RFQ
+                                    </button>
+                                    <button class="btn-secondary btn-icon-label" id="quick-add-vendor-btn" onclick="switchScreen('vendors')" style="display: none;">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+                                        Register New Supplier
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div style="border-top: 1px solid var(--border-color); padding-top: 20px; margin-top: 20px;">
+                                <h3 style="font-size: 13px; font-weight: 700; margin-bottom: 12px;">Active Procurement Process</h3>
+                                <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px;">
+                                    <span>Workflow compliance</span>
+                                    <span style="color: var(--color-success); font-weight: 700;">100% Secure</span>
+                                </div>
+                                <div style="background: var(--bg-input); height: 6px; border-radius: 3px; margin-top: 8px; overflow: hidden;">
+                                    <div style="width: 100%; height: 100%; background: linear-gradient(to right, var(--color-primary), var(--color-success));"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Admin Panel Only -->
+                    <div class="dashboard-panel" id="admin-actions-panel" style="display: none; margin-top: 24px;">
+                        <div class="panel-header">
+                            <h2 class="panel-title">System Administrator Terminal</h2>
+                        </div>
+                        <div style="display: flex; gap: 12px; margin-top: 14px; flex-wrap: wrap;">
+                            <button class="btn-primary" onclick="adminManageUsers()" style="width: auto; padding: 10px 20px; background: #1C1714; color: white; border: none; border-radius: var(--border-radius); font-weight: 600; cursor: pointer;">
+                                Manage Users
+                            </button>
+                            <button class="btn-secondary" onclick="switchScreen('vendors')" style="width: auto; padding: 10px 20px; background: transparent; border: 1px solid var(--border-color); border-radius: var(--border-radius); font-weight: 600; cursor: pointer;">
+                                Manage Vendors
+                            </button>
+                            <button class="btn-outline-primary" onclick="switchScreen('reports')" style="width: auto; padding: 10px 20px; background: transparent; border: 1px solid var(--color-primary); color: var(--color-primary); border-radius: var(--border-radius); font-weight: 600; cursor: pointer;">
+                                View Procurement Analytics
+                            </button>
+                        </div>
+                        
+                        <!-- SMTP Configuration Sub-panel -->
+                        <div style="margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--border-color);">
+                            <h3 style="font-size: 14px; font-weight: 700; margin-bottom: 15px; color: var(--color-primary); font-family: var(--font-serif);">Configure SMTP Email Server</h3>
+                            <form id="smtp-config-form" onsubmit="event.preventDefault(); saveSmtpConfig();" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
+                                <div class="form-group">
+                                    <label for="smtp-host">SMTP Host Server</label>
+                                    <input type="text" id="smtp-host" class="form-control" style="padding-left: 14px;" placeholder="e.g. smtp.gmail.com">
+                                </div>
+                                <div class="form-group">
+                                    <label for="smtp-port">SMTP Port</label>
+                                    <input type="number" id="smtp-port" class="form-control" style="padding-left: 14px;" placeholder="587" value="587">
+                                </div>
+                                <div class="form-group">
+                                    <label for="smtp-user">SMTP Username / Email</label>
+                                    <input type="text" id="smtp-user" class="form-control" style="padding-left: 14px;" placeholder="e.g. noreply@gmail.com">
+                                </div>
+                                <div class="form-group">
+                                    <label for="smtp-pass">SMTP Password / Key</label>
+                                    <input type="password" id="smtp-pass" class="form-control" style="padding-left: 14px;" placeholder="Keep empty to preserve existing">
+                                </div>
+                                <div class="form-group">
+                                    <label for="smtp-from">Default Sender Address</label>
+                                    <input type="email" id="smtp-from" class="form-control" style="padding-left: 14px;" placeholder="e.g. noreply@vendorbridge.com">
+                                </div>
+                                <div class="form-group" style="grid-column: 1 / -1; display: flex; gap: 12px; margin-top: 10px; align-items: flex-end; flex-wrap: wrap;">
+                                    <button type="submit" class="btn-primary" style="width: auto; padding: 10px 20px;">Save SMTP Configuration</button>
+                                    <div style="display: flex; gap: 6px; align-items: center; width: 100%; max-width: 380px;">
+                                        <input type="email" id="smtp-test-target" class="form-control" style="padding-left: 14px;" placeholder="recipient@example.com">
+                                        <button type="button" class="btn-secondary" onclick="sendTestEmail()" style="white-space: nowrap; height: 42px; display: inline-flex; align-items: center; justify-content: center;">Send Test Email</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ========================================================== -->
+                <!-- SCREEN 3: VENDOR MANAGEMENT                               -->
+                <!-- ========================================================== -->
+                <section id="screen-vendors" class="screen-view">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+                        <div>
+                            <p style="color: var(--text-secondary); font-size: 14px;">Manage supplier profiles, registrations, categories, compliance metrics.</p>
+                        </div>
+                        <button class="btn-primary btn-icon-label" id="add-vendor-btn" onclick="openAddVendorModal()" style="width: auto; padding: 10px 20px; display: none;">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                            Add New Supplier
+                        </button>
+                    </div>
+                    
+                    <div class="dashboard-panel">
+                        <div class="table-container">
+                            <table class="custom-table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Supplier Name</th>
+                                        <th>Category</th>
+                                        <th>Compliance State</th>
+                                        <th>GSTIN Number</th>
+                                        <th>Representative</th>
+                                        <th>Rating</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="vendors-list-body">
+                                    <!-- Loaded dynamically via JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ========================================================== -->
+                <!-- SCREEN 3B: USERS MANAGEMENT (Admin Only)                   -->
+                <!-- ========================================================== -->
+                <section id="screen-users" class="screen-view">
+                    <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 24px;">Manage system users, login credentials, and designated registry roles.</p>
+                    
+                    <div class="dashboard-panel">
+                        <div class="panel-header" style="margin-bottom: 16px;">
+                            <h2 class="panel-title">System User Registry</h2>
+                        </div>
+                        <div class="table-container">
+                            <table class="custom-table">
+                                <thead>
+                                    <tr>
+                                        <th>User Name</th>
+                                        <th>Email Address</th>
+                                        <th>Designated System Role</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="users-list-body">
+                                    <!-- Populated dynamically via JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ========================================================== -->
+                <!-- SCREEN 4: RFQ CREATION (STEP-BY-STEP WORKFLOW)            -->
+                <!-- ========================================================== -->
+                <section id="screen-rfqs" class="screen-view">
+                    
+                    <!-- 1. RFQ HISTORY LEDGER VIEW (Officer Role Default) -->
+                    <div id="rfq-history-container">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+                            <div>
+                                <p style="color: var(--text-secondary); font-size: 14px;">Audit previous RFQs, track supplier proposals, and check bid closures.</p>
+                            </div>
+                            <button class="btn-primary btn-icon-label" onclick="showCreateRFQForm()" id="btn-officer-create-rfq" style="width: auto; padding: 10px 20px;">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                                Create New RFQ
+                            </button>
+                        </div>
+
+                        <!-- Search & Filter Controls -->
+                        <div style="display: flex; gap: 16px; margin-bottom: 16px; flex-wrap: wrap; align-items: center;">
+                            <div style="flex: 1; min-width: 250px; position: relative;">
+                                <input type="text" id="rfq-search-input" class="form-control" style="padding-left: 36px;" placeholder="Search RFQs by Title, ID, Item or Category..." oninput="filterRFQsHistory()">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-secondary);"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                            </div>
+                            <div style="width: 180px;">
+                                <select id="rfq-status-filter" class="form-control" style="background-color: var(--bg-input); padding-left: 12px;" onchange="filterRFQsHistory()">
+                                    <option value="All">All Statuses</option>
+                                    <option value="Bidding">Bidding</option>
+                                    <option value="Comparison">Comparison</option>
+                                    <option value="Approved">Approved</option>
+                                    <option value="Closed">Closed</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="dashboard-panel">
+                            <div class="table-container">
+                                <table class="custom-table">
+                                    <thead>
+                                        <tr>
+                                            <th>RFQ ID</th>
+                                            <th>Project Title</th>
+                                            <th>Procurement Items</th>
+                                            <th>Closing Date</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="rfqs-history-list-body">
+                                        <!-- Loaded dynamically via JS -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2. RFQ CREATION STEPPER WORKFLOW (Hidden by default) -->
+                    <div id="rfq-creation-container" style="display: none;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid var(--border-color); padding-bottom: 12px;">
+                            <h2 style="font-family: var(--font-serif); font-size: 20px; font-weight: 700; color: var(--color-primary);">New Request for Quotation (RFQ) Requisition</h2>
+                            <button class="btn-secondary" onclick="hideCreateRFQForm()" style="padding: 6px 12px; font-size: 12px;">✕ Cancel Requisition</button>
+                        </div>
+
+                        <!-- Stepper Progress Header -->
+                        <div class="rfq-stepper">
+                            <div class="step-bar" id="rfq-step-bar" style="width: 0%;"></div>
+                            <div class="rfq-step active" id="rfq-step-indicator-1">
+                                <div class="step-circle">1</div>
+                                <span class="step-label">RFQ details</span>
+                            </div>
+                            <div class="rfq-step" id="rfq-step-indicator-2">
+                                <div class="step-circle">2</div>
+                                <span class="step-label">Invite vendors</span>
+                            </div>
+                            <div class="rfq-step" id="rfq-step-indicator-3">
+                                <div class="step-circle">3</div>
+                                <span class="step-label">Confirm RFQ</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Form Container -->
+                        <div class="rfq-form-panel">
+                            <form id="rfq-creation-form" onsubmit="event.preventDefault();">
+                                
+                                <!-- STEP 1: GENERAL SPECIFICATIONS -->
+                                <div class="rfq-step-content active" id="rfq-form-step-1">
+                                    <h3 style="font-size: 15px; margin-bottom: 20px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px;">Step 1: RFQ Specifications</h3>
+                                    <div class="form-group">
+                                        <label for="rfq-title">Request Title / Project Name</label>
+                                        <input type="text" id="rfq-title" class="form-control" placeholder="e.g. Office Workspace Furniture Expansion" style="padding-left: 14px;" required>
+                                    </div>
+                                    <div class="input-grid-2">
+                                        <div class="form-group">
+                                            <label for="rfq-category">Procurement Category</label>
+                                            <select id="rfq-category" class="form-control" style="padding-left: 14px; background-color: var(--bg-input);">
+                                                <option value="Furniture">Furniture & Fittings</option>
+                                                <option value="IT Hardware">IT Hardware & Laptops</option>
+                                                <option value="Stationery">Stationery Supplies</option>
+                                                <option value="Electronics">Security & Electronics</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="rfq-deadline">Response Deadline</label>
+                                            <input type="date" id="rfq-deadline" class="form-control" style="padding-left: 14px;" required>
+                                        </div>
+                                    </div>
+                                    <div class="input-grid-2">
+                                        <div class="form-group">
+                                            <label for="rfq-item-name">Item Name / Specification</label>
+                                            <input type="text" id="rfq-item-name" class="form-control" placeholder="e.g. Ergonomic Office Chair V2" style="padding-left: 14px;" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="rfq-qty">Requested Quantity</label>
+                                            <input type="number" id="rfq-qty" class="form-control" placeholder="e.g. 150" min="1" style="padding-left: 14px;" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="rfq-description">Additional Scope / Technical Specs Description</label>
+                                        <textarea id="rfq-description" class="form-control" rows="4" style="padding-left: 14px; resize: none;" placeholder="Provide technical guidelines, materials required, and logistics details..."></textarea>
+                                    </div>
+                                    <div style="display: flex; justify-content: flex-end; margin-top: 20px;">
+                                        <button type="button" class="btn-primary" onclick="goToRFQStep(2)" style="width: auto; padding: 10px 24px;">Next: Invite Vendors</button>
+                                    </div>
+                                </div>
+                                
+                                <!-- STEP 2: ASSIGNING VENDORS -->
+                                <div class="rfq-step-content" id="rfq-form-step-2">
+                                    <h3 style="font-size: 15px; margin-bottom: 12px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px;">Step 2: Assign Vendors for Invitation</h3>
+                                    <p style="color: var(--text-secondary); font-size: 13px; margin-bottom: 20px;">Select from registered compliant vendors. They will receive automated notifications to log in and place pricing bids.</p>
+                                    
+                                    <div class="vendor-select-list" id="rfq-invite-vendors-list">
+                                        <!-- Loaded dynamically based on categories -->
+                                    </div>
+                                    
+                                    <div style="display: flex; justify-content: space-between; margin-top: 24px;">
+                                        <button type="button" class="btn-secondary" onclick="goToRFQStep(1)">Back</button>
+                                        <button type="button" class="btn-primary" onclick="goToRFQStep(3)" style="width: auto; padding: 10px 24px;">Next: Review & Submit</button>
+                                    </div>
+                                </div>
+                                
+                                <!-- STEP 3: CONFIRM & SUBMIT -->
+                                <div class="rfq-step-content" id="rfq-form-step-3">
+                                    <h3 style="font-size: 15px; margin-bottom: 20px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px;">Step 3: Review Details & Publish</h3>
+                                    
+                                    <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); border-radius: var(--border-radius); padding: 20px; display: flex; flex-direction: column; gap: 16px; margin-bottom: 24px;">
+                                        <div>
+                                            <span style="font-size: 12px; color: var(--text-secondary);">Request Title:</span>
+                                            <h4 id="review-rfq-title" style="font-size: 16px; font-weight: 700; margin-top: 4px;">Office Expansion</h4>
+                                        </div>
+                                        <div class="input-grid-2">
+                                            <div>
+                                                <span style="font-size: 12px; color: var(--text-secondary);">Category:</span>
+                                                <p id="review-rfq-category" style="font-size: 14px; font-weight: 600; margin-top: 4px;"></p>
+                                            </div>
+                                            <div>
+                                                <span style="font-size: 12px; color: var(--text-secondary);">Response Deadline:</span>
+                                                <p id="review-rfq-deadline" style="font-size: 14px; font-weight: 600; margin-top: 4px;"></p>
+                                            </div>
+                                        </div>
+                                        <div class="input-grid-2">
+                                            <div>
+                                                <span style="font-size: 12px; color: var(--text-secondary);">Items Requirements:</span>
+                                                <p id="review-rfq-item" style="font-size: 14px; font-weight: 600; margin-top: 4px;"></p>
+                                            </div>
+                                            <div>
+                                                <span style="font-size: 12px; color: var(--text-secondary);">Invited Suppliers Count:</span>
+                                                <p id="review-rfq-vendors-count" style="font-size: 14px; font-weight: 600; margin-top: 4px; color: var(--color-primary);"></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div style="display: flex; justify-content: space-between; margin-top: 24px;">
+                                        <button type="button" class="btn-secondary" onclick="goToRFQStep(2)">Back</button>
+                                        <button type="button" class="btn-primary" onclick="submitNewRFQ()" style="width: auto; padding: 10px 24px;">Publish & Email Vendors</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ========================================================== -->
+                <!-- SCREEN 5: VENDOR QUOTATION SUBMISSION PORTAL             -->
+                <!-- ========================================================== -->
+                <section id="screen-quotations" class="screen-view">
+                    <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 24px;">Portal for vendors to review invited RFQs, inputs pricing structures, submit terms sheets.</p>
+                    
+                    <div class="dashboard-grid">
+                        <div class="dashboard-panel" id="vendor-invitations-panel" style="grid-column: 1 / -1;">
+                            <div class="panel-header" style="flex-wrap: wrap; gap: 12px; margin-bottom: 16px;">
+                                <h2 class="panel-title">Your Assigned Invitations</h2>
+                            </div>
+                            
+                            <!-- Search & Filter for Vendor Assigned Invitations -->
+                            <div style="display: flex; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; align-items: center;">
+                                <div style="flex: 1; min-width: 200px; position: relative;">
+                                    <input type="text" id="vendor-rfq-search" class="form-control" style="padding-left: 36px; padding-top: 8px; padding-bottom: 8px; font-size: 13px;" placeholder="Search assigned RFQs..." oninput="filterVendorRFQs()">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-secondary);"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                                </div>
+                                <div style="width: 140px;">
+                                    <select id="vendor-rfq-status" class="form-control" style="background-color: var(--bg-input); padding-left: 10px; padding-top: 8px; padding-bottom: 8px; font-size: 13px; height: 38px;" onchange="filterVendorRFQs()">
+                                        <option value="All">All Statuses</option>
+                                        <option value="Bidding">Bidding</option>
+                                        <option value="Comparison">Comparison</option>
+                                        <option value="Approved">Approved</option>
+                                        <option value="Closed">Closed</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="table-container">
+                                <table class="custom-table">
+                                    <thead>
+                                        <tr>
+                                            <th>RFQ ID</th>
+                                            <th>Project Title</th>
+                                            <th>Requirement</th>
+                                            <th>Deadline</th>
+                                            <th>Your Proposal</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="vendor-rfqs-list">
+                                        <!-- Loaded dynamically via JS -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        
+                        <!-- Quotation Submission Form panel -->
+                        <div class="dashboard-panel" id="vendor-submission-panel" style="display: none;">
+                            <div class="panel-header">
+                                <h2 class="panel-title">Submit Bid Proposal</h2>
+                            </div>
+                            <form id="vendor-quote-form" onsubmit="event.preventDefault(); submitQuotation();">
+                                <input type="hidden" id="quote-rfq-id">
+                                <div class="form-group">
+                                    <label>Project Title</label>
+                                    <p id="quote-project-title" style="font-weight: 700; font-size: 14px;"></p>
+                                </div>
+                                <div class="form-group">
+                                    <label>Requirements</label>
+                                    <p id="quote-project-reqs" style="font-size: 13px; color: var(--text-secondary);"></p>
+                                </div>
+                                <div class="input-grid-2">
+                                    <div class="form-group">
+                                        <label for="quote-unit-price">Unit Bid Price (₹)</label>
+                                        <input type="number" id="quote-unit-price" class="form-control" placeholder="0.00" min="1" step="0.01" style="padding-left: 14px;" oninput="calculateQuoteTotal()" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="quote-lead-time">Lead Time (Days)</label>
+                                        <input type="number" id="quote-lead-time" class="form-control" placeholder="e.g. 14" min="1" style="padding-left: 14px;" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Total Estimate Math</label>
+                                    <div style="background: var(--bg-input); padding: 12px; border-radius: var(--border-radius); font-weight: 700; font-size: 16px; color: var(--color-success); border: 1px solid var(--border-color);">
+                                        Total: ₹<span id="quote-total-display">0.00</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="quote-comments">Delivery Terms / Comments</label>
+                                    <textarea id="quote-comments" class="form-control" rows="3" style="padding-left: 14px; resize: none;" placeholder="Outline warranties, shipping fees, specifications exceptions..."></textarea>
+                                </div>
+                                <div style="display: flex; gap: 10px; margin-top: 10px;">
+                                    <button type="submit" class="btn-primary">Submit Final Quotation</button>
+                                    <button type="button" class="btn-secondary" onclick="renderVendorQuotations()">Cancel</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ========================================================== -->
+                <!-- SCREEN 6: QUOTATION COMPARISON CARD ENGINE                 -->
+                <!-- ========================================================== -->
+                <section id="screen-comparison" class="screen-view">
+                    <!-- Dropdown selection of RFQs to compare -->
+                    <div style="display: flex; gap: 20px; align-items: center; margin-bottom: 24px;">
+                        <span style="font-weight: 600;">Select RFQ to Compare:</span>
+                        <select id="compare-rfq-select" class="form-control" style="width: auto; padding-left: 14px; background-color: var(--bg-input);" onchange="loadRFQComparison(this.value)">
+                            <!-- Loaded dynamically via JS -->
+                        </select>
+                    </div>
+                    
+                    <div class="comparison-layout">
+                        <!-- Brief description of selected RFQ -->
+                        <div class="comparison-header" id="compare-rfq-header-details">
+                            <!-- Loaded dynamically via JS -->
+                        </div>
+                        
+                        <!-- Side-by-side cards -->
+                        <div class="comparison-grid" id="comparison-cards-container">
+                            <!-- Loaded dynamically via JS -->
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ========================================================== -->
+                <!-- SCREEN 7: APPROVAL WORKFLOW MATRICES                      -->
+                <!-- ========================================================== -->
+                <section id="screen-approvals" class="screen-view">
+                    <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 24px;">Manager review portal. Track active procurement stages, audit remarks, sign-off requests.</p>
+                    
+                    <div class="approval-workflow-details">
+                        <!-- Left Panel: Pending Approvals list -->
+                        <div class="timeline-tracker">
+                            <h3 style="font-size: 15px; font-weight: 700; border-bottom: 1px solid var(--border-color); padding-bottom: 10px;">Pending Approvals</h3>
+                            <div style="display: flex; flex-direction: column; gap: 10px;" id="approvals-pending-list">
+                                <!-- Loaded dynamically via JS -->
+                            </div>
+                        </div>
+                        
+                        <!-- Right Panel: Full Approval Workspace -->
+                        <div class="dashboard-panel" id="approval-workspace-panel" style="display: none;">
+                            <div class="panel-header">
+                                <h2 class="panel-title" id="approval-ws-title">Review Project</h2>
+                                <span class="badge badge-warning" id="approval-ws-status">Pending</span>
+                            </div>
+                            
+                            <div style="background: rgba(255,255,255,0.01); border: 1px solid var(--border-color); padding: 18px; border-radius: var(--border-radius); margin-bottom: 24px;">
+                                <h4 style="font-size: 12px; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 10px;">Recommended Quotation Details</h4>
+                                <div class="input-grid-2" style="margin-bottom: 12px;">
+                                    <div>
+                                        <span style="font-size: 11px; color: var(--text-muted);">Recommended Vendor</span>
+                                        <p style="font-weight: 700;" id="approval-ws-vendor"></p>
+                                    </div>
+                                    <div>
+                                        <span style="font-size: 11px; color: var(--text-muted);">Bid Quote Value</span>
+                                        <p style="font-weight: 700; color: var(--color-success);" id="approval-ws-cost"></p>
+                                    </div>
+                                </div>
+                                <div class="input-grid-2">
+                                    <div>
+                                        <span style="font-size: 11px; color: var(--text-muted);">Delivery Timeline</span>
+                                        <p style="font-weight: 700;" id="approval-ws-delivery"></p>
+                                    </div>
+                                    <div>
+                                        <span style="font-size: 11px; color: var(--text-muted);">Vendor Compliance rating</span>
+                                        <p style="font-weight: 700; color: var(--color-warning);" id="approval-ws-rating">★ 4.8</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Workflows sequential timelines -->
+                            <div style="margin-bottom: 24px;">
+                                <h4 style="font-size: 12px; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 16px;">Sequential Milestones History</h4>
+                                <div style="display: flex; flex-direction: column; gap: 16px;" id="approval-ws-timeline">
+                                    <!-- Dynamic workflow nodes -->
+                                </div>
+                            </div>
+                            
+                            <!-- Decision Section -->
+                            <div style="border-top: 1px solid var(--border-color); padding-top: 20px;">
+                                <div class="form-group">
+                                    <label for="approval-remarks">Manager Remarks / Sign-off Comments</label>
+                                    <textarea id="approval-remarks" class="form-control" rows="3" style="padding-left: 14px; resize: none;" placeholder="Sign-off comments, budget adjustments justification..."></textarea>
+                                </div>
+                                <div style="display: flex; justify-content: flex-end; gap: 12px;">
+                                    <button class="btn-secondary" onclick="processApproval(false)" style="color: var(--color-danger); border-color: var(--color-danger-glow);">Reject Procurement</button>
+                                    <button class="btn-primary" onclick="processApproval(true)" style="width: auto; padding: 10px 24px;">Approve & Generate PO</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ========================================================== -->
+                <!-- SCREEN 8: PURCHASE ORDER & INVOICE GENERATION             -->
+                <!-- ========================================================== -->
+                <section id="screen-purchaseorders" class="screen-view">
+                    <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 24px;">View auto-generated PO files and Invoice invoices derived from approved quotations.</p>
+                    
+                    <div class="dashboard-grid">
+                        <!-- Left Panel: list of POs -->
+                        <div class="dashboard-panel">
+                            <div class="panel-header">
+                                <h2 class="panel-title">Available PO & Invoices</h2>
+                            </div>
+                            <div class="table-container">
+                                <table class="custom-table">
+                                    <thead>
+                                        <tr>
+                                            <th>PO Ref</th>
+                                            <th>Vendor</th>
+                                            <th>RFQ Origin</th>
+                                            <th>Math Total</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="po-list-body">
+                                        <!-- Loaded dynamically via JS -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        
+                        <!-- Right Panel: PDF Viewer / Document -->
+                        <div class="dashboard-panel" id="po-document-panel" style="display: none;">
+                            <div class="panel-header">
+                                <h2 class="panel-title">Official Document Viewer</h2>
+                                <div class="btn-row" id="po-actions-row">
+                                    <button class="btn-secondary btn-icon-label" onclick="printPODocument()">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+                                        Print / PDF
+                                    </button>
+                                    <button class="btn-outline-primary btn-icon-label" onclick="emailPODocument()">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                                        Send Email
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- PO PDF Box -->
+                            <div class="po-invoice-template" id="po-render-target">
+                                <!-- Loaded dynamically via JS -->
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ========================================================== -->
+                <!-- SCREEN 8B: INVOICES LEDGER & AUDITING                      -->
+                <!-- ========================================================== -->
+                <section id="screen-invoices" class="screen-view">
+                    <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 24px;">Manage and audit vendor billing invoices, payment statuses, and corporate ledger reconciliations.</p>
+                    
+                    <!-- Invoices Overview Cards -->
+                    <div class="reports-kpis" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-bottom: 24px;">
+                        <div class="stat-card">
+                            <div class="stat-info">
+                                <h3>Pending Payment</h3>
+                                <div class="stat-value" id="inv-kpi-pending">₹0.00</div>
+                                <span class="stat-badge warning">Unpaid invoices total</span>
+                            </div>
+                            <div class="stat-icon warning">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6h11M6 10h8M10 6c6 0 6 8 0 8l8 8"/></svg>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-info">
+                                <h3>Total Payments Made</h3>
+                                <div class="stat-value" id="inv-kpi-paid">₹0.00</div>
+                                <span class="stat-badge success">Paid reconciled sum</span>
+                            </div>
+                            <div class="stat-icon success">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-5"/></svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-grid">
+                        <!-- Left Panel: list of Invoices -->
+                        <div class="dashboard-panel">
+                            <div class="panel-header">
+                                <h2 class="panel-title">Invoice Ledger</h2>
+                            </div>
+                            <div class="table-container">
+                                <table class="custom-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Invoice ID</th>
+                                            <th>PO Ref</th>
+                                            <th>Vendor</th>
+                                            <th>Amount</th>
+                                            <th>Due Date</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="invoice-list-body">
+                                        <!-- Loaded dynamically via JS -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        
+                        <!-- Right Panel: Invoice Document Viewer -->
+                        <div class="dashboard-panel" id="invoice-document-panel" style="display: none;">
+                            <div class="panel-header">
+                                <h2 class="panel-title">Official Invoice Document</h2>
+                                <div class="btn-row" id="invoice-actions-row">
+                                    <!-- Dynamic based on role and status -->
+                                </div>
+                            </div>
+                            
+                            <!-- Invoice Template Box -->
+                            <div class="po-invoice-template" id="invoice-render-target">
+                                <!-- Loaded dynamically via JS -->
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- ========================================================== -->
+                <section id="screen-activity" class="screen-view">
+                    <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 24px;">Secure blockchain-grade system audit logs tracking logins, bidding activity, signoffs.</p>
+                    
+                    <div class="dashboard-panel">
+                        <div class="panel-header">
+                            <h2 class="panel-title">System Audit Log Trail</h2>
+                            <button class="btn-secondary" onclick="exportAuditLogs()">Export Logs CSV</button>
+                        </div>
+                        <div class="activities-list" id="activity-logs-container">
+                            <!-- Loaded dynamically via JS -->
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ========================================================== -->
+                <!-- SCREEN 10: REPORTS & ANALYTICS                            -->
+                <!-- ========================================================== -->
+                <section id="screen-reports" class="screen-view">
+                    <!-- Reports overview indicators -->
+                    <div class="reports-kpis">
+                        <div class="stat-card">
+                            <div class="stat-info">
+                                <h3>Total Spend (Selected Bids)</h3>
+                                <div class="stat-value" id="rep-spend">₹0.00</div>
+                                <span class="stat-badge success">↑ 12% vs last month</span>
+                            </div>
+                            <div class="stat-icon primary">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-info">
+                                <h3>Savings Achieved</h3>
+                                <div class="stat-value" id="rep-savings">₹0.00</div>
+                                <span class="stat-badge success">↓ 4.2% Avg Quote Diff</span>
+                            </div>
+                            <div class="stat-icon success">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-info">
+                                <h3>RFQ Fulfillment Rate</h3>
+                                <div class="stat-value" id="rep-fulfillment">94.8%</div>
+                                <span class="stat-badge success">↑ 2.1% Lead times</span>
+                            </div>
+                            <div class="stat-icon info">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-info">
+                                <h3>Active Bidding Vendors</h3>
+                                <div class="stat-value" id="rep-vendors">5 Active</div>
+                                <span class="stat-badge success">100% Compliance</span>
+                            </div>
+                            <div class="stat-icon warning">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="reports-charts-grid">
+                        <!-- Spend by Category chart -->
+                        <div class="dashboard-panel">
+                            <div class="panel-header">
+                                <h2 class="panel-title">Spend by Category (Monthly)</h2>
+                            </div>
+                            <div class="chart-container" id="category-chart">
+                                <div class="chart-bar-group">
+                                    <div class="chart-bar" style="height: 85%;" data-value="₹225k"><span class="chart-bar-tooltip">₹225,000</span></div>
+                                    <span class="chart-label">IT Hardware</span>
+                                </div>
+                                <div class="chart-bar-group">
+                                    <div class="chart-bar" style="height: 60%;" data-value="₹145k"><span class="chart-bar-tooltip">₹145,000</span></div>
+                                    <span class="chart-label">Furniture</span>
+                                </div>
+                                <div class="chart-bar-group">
+                                    <div class="chart-bar" style="height: 25%;" data-value="₹48k"><span class="chart-bar-tooltip">₹48,000</span></div>
+                                    <span class="chart-label">Stationery</span>
+                                </div>
+                                <div class="chart-bar-group">
+                                    <div class="chart-bar" style="height: 12%;" data-value="₹24.5k"><span class="chart-bar-tooltip">₹24,500</span></div>
+                                    <span class="chart-label">Electronics</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Vendor Bids Distribution Donut SVG -->
+                        <div class="dashboard-panel">
+                            <div class="panel-header">
+                                <h2 class="panel-title">Vendor PO Allocations</h2>
+                            </div>
+                            <div class="donut-chart-container">
+                                <div class="donut-svg-wrapper">
+                                    <!-- Donut Chart representation -->
+                                    <svg viewBox="0 0 36 36" style="transform: rotate(-90deg); width: 100%; height: 100%;">
+                                        <!-- Background circle -->
+                                        <circle cx="18" cy="18" r="15.915" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="4"></circle>
+                                        <!-- Furniture Ltd (45%) -->
+                                        <circle cx="18" cy="18" r="15.915" fill="none" stroke="var(--color-primary)" stroke-width="4" stroke-dasharray="45 55" stroke-dashoffset="0"></circle>
+                                        <!-- Infa Supplies (30%) -->
+                                        <circle cx="18" cy="18" r="15.915" fill="none" stroke="var(--color-success)" stroke-width="4" stroke-dasharray="30 70" stroke-dashoffset="-45"></circle>
+                                        <!-- Stationery Hub (25%) -->
+                                        <circle cx="18" cy="18" r="15.915" fill="none" stroke="var(--color-warning)" stroke-width="4" stroke-dasharray="25 75" stroke-dashoffset="-75"></circle>
+                                    </svg>
+                                </div>
+                                
+                                <div class="donut-chart-labels">
+                                    <div class="donut-label-item">
+                                        <div class="color-dot" style="background: var(--color-primary);"></div>
+                                        <span>Furniture Ltd (45%)</span>
+                                    </div>
+                                    <div class="donut-label-item">
+                                        <div class="color-dot" style="background: var(--color-success);"></div>
+                                        <span>Infa Supplies (30%)</span>
+                                    </div>
+                                    <div class="donut-label-item">
+                                        <div class="color-dot" style="background: var(--color-warning);"></div>
+                                        <span>Stationery Hub (25%)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Supplier Performance & Budget Reconciler Tables -->
+                    <div class="reports-tables-grid">
+                        <!-- Table 1: Supplier Performance Leaderboard -->
+                        <div class="dashboard-panel">
+                            <div class="panel-header" style="margin-bottom: 16px;">
+                                <h2 class="panel-title">Supplier Performance Leaderboard</h2>
+                            </div>
+                            <div class="table-container">
+                                <table class="custom-table reports-dense-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Supplier Name</th>
+                                            <th>Category</th>
+                                            <th>GSTIN</th>
+                                            <th>Rating</th>
+                                            <th>Compliance</th>
+                                            <th style="text-align: right;">PO Count</th>
+                                            <th style="text-align: right;">Total Spend (₹)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="reports-leaderboard-body">
+                                        <!-- Loaded dynamically via JS -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Table 2: Budget Allocation Reconciler Matrix -->
+                        <div class="dashboard-panel">
+                            <div class="panel-header" style="margin-bottom: 16px;">
+                                <h2 class="panel-title">Category Budget Reconciler Matrix</h2>
+                            </div>
+                            <div class="table-container">
+                                <table class="custom-table reports-dense-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Category</th>
+                                            <th style="text-align: right;">Allocated Budget (₹)</th>
+                                            <th style="text-align: right;">Total Spent (₹)</th>
+                                            <th style="text-align: right;">Remaining Budget (₹)</th>
+                                            <th style="text-align: right;">Savings (₹)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="reports-budget-body">
+                                        <!-- Loaded dynamically via JS -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+            </div>
+        </main>
+    </div>
+
+    <!-- ========================================================== -->
+    <!-- OVERLAYS AND MODAL WINDOWS                                 -->
+    <!-- ========================================================== -->
+    
+    <!-- 1. ADD VENDOR MODAL -->
+    <div class="modal-overlay" id="add-vendor-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Register Vendor Profile</h3>
+                <button class="close-modal-btn" onclick="closeAddVendorModal()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+            </div>
+            <form id="add-vendor-form" onsubmit="event.preventDefault(); submitAddVendor();">
+                <div class="form-group">
+                    <label for="vendor-name">Supplier Organization Name</label>
+                    <input type="text" id="vendor-name" class="form-control" style="padding-left: 14px;" placeholder="e.g. Gupta Office Systems" required>
+                </div>
+                <div class="input-grid-2">
+                    <div class="form-group">
+                        <label for="vendor-category">Primary Category</label>
+                        <select id="vendor-category" class="form-control" style="padding-left: 14px; background-color: var(--bg-input);">
+                            <option value="Furniture">Furniture & Fittings</option>
+                            <option value="IT Hardware">IT Hardware & Laptops</option>
+                            <option value="Stationery">Stationery Supplies</option>
+                            <option value="Electronics">Security & Electronics</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="vendor-gst">GSTIN Number</label>
+                        <input type="text" id="vendor-gst" class="form-control" style="padding-left: 14px;" placeholder="e.g. 29GGPPP1234A1Z5" required>
+                    </div>
+                </div>
+                <div class="input-grid-2">
+                    <div class="form-group">
+                        <label for="vendor-rep">Representative Name</label>
+                        <input type="text" id="vendor-rep" class="form-control" style="padding-left: 14px;" placeholder="e.g. Rohan Sharma" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="vendor-email">Contact Email</label>
+                        <input type="email" id="vendor-email" class="form-control" style="padding-left: 14px;" placeholder="e.g. sales@guptaoffice.in" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="vendor-address">Warehouse Address</label>
+                    <input type="text" id="vendor-address" class="form-control" style="padding-left: 14px;" placeholder="e.g. 102 industrial complex, Bangalore, India" required>
+                </div>
+                <div class="input-grid-2">
+                    <div class="form-group">
+                        <label for="vendor-status">Account Status</label>
+                        <select id="vendor-status" class="form-control" style="padding-left: 14px; background-color: var(--bg-input);">
+                            <option value="Active">Active</option>
+                            <option value="Inactive">Inactive</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="vendor-compliance">Compliance Status</label>
+                        <select id="vendor-compliance" class="form-control" style="padding-left: 14px; background-color: var(--bg-input);">
+                            <option value="Verified">Verified</option>
+                            <option value="Pending">Pending Verification</option>
+                            <option value="Under Review">Under Review</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="btn-primary" style="margin-top: 10px;">Verify GST & Register</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- 1B. THREE-WAY MATCHING RECONCILER MODAL -->
+    <div class="modal-overlay" id="matching-reconciler-modal">
+        <div class="modal-content" style="max-width: 600px;">
+            <div class="modal-header">
+                <h3 style="font-family: var(--font-serif); font-size: 18px;">Accounts Payable: Three-Way Matching Reconciler</h3>
+                <button class="close-modal-btn" onclick="closeMatchingModal()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+            </div>
+            
+            <div style="background: var(--bg-card-hover); padding: 14px; border: 1px solid var(--border-color); border-radius: var(--border-radius); margin-bottom: 20px; font-size: 13px;">
+                <p style="margin-bottom: 6px;"><strong style="color: var(--color-primary);">Invoice ID:</strong> <span id="match-invoice-id" style="font-family: var(--font-mono); font-weight:700;">-</span></p>
+                <p style="margin-bottom: 6px;"><strong>Purchase Order Origin:</strong> <span id="match-po-ref" style="font-family: var(--font-mono); font-weight:700;">-</span></p>
+                <p style="margin-bottom: 6px;"><strong>Requisition Category:</strong> <span id="match-rfq-category">-</span></p>
+                <p><strong>Billed Vendor:</strong> <span id="match-vendor-name">-</span></p>
+            </div>
+
+            <!-- Matching Table Metrics -->
+            <table class="po-table" style="margin-bottom: 20px; border: 1px solid var(--border-color);">
+                <thead>
+                    <tr style="background: var(--bg-card-hover);">
+                        <th style="padding: 8px; font-size: 11px;">Document Source</th>
+                        <th style="padding: 8px; font-size: 11px; text-align: right;">Total Amount</th>
+                        <th style="padding: 8px; font-size: 11px; text-align: center;">Delivery State</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Purchase Order (PO)</strong></td>
+                        <td style="text-align: right; font-family: var(--font-mono); font-weight: 600;" id="match-po-amount">₹0.00</td>
+                        <td style="text-align: center; color: var(--color-success); font-weight: 600;">Authorized</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Goods Receipt (GR)</strong></td>
+                        <td style="text-align: right; font-family: var(--font-mono);">-</td>
+                        <td style="text-align: center; font-weight: 700;" id="match-gr-status">Delivered</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Supplier Invoice</strong></td>
+                        <td style="text-align: right; font-family: var(--font-mono); font-weight: 600; color: var(--color-primary);" id="match-invoice-amount">₹0.00</td>
+                        <td style="text-align: center; color: var(--color-warning); font-weight: 600;">Awaiting AP</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4 style="font-size: 12px; text-transform: uppercase; margin-bottom: 12px; font-family: var(--font-mono); color: var(--text-secondary); border-bottom: 1px dashed var(--border-color); padding-bottom: 6px;">Reconciliation Checklist:</h4>
+            
+            <form id="matching-form" onsubmit="event.preventDefault(); submitPaymentReconciliation();">
+                <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px;">
+                    <label style="display: flex; align-items: flex-start; gap: 10px; cursor: pointer; padding: 8px; border: 1px solid var(--border-color); border-radius: var(--border-radius); background: #FFFFFF;">
+                        <input type="checkbox" id="check-po-match" style="margin-top: 4px;" required>
+                        <div>
+                            <strong style="font-size: 13px;">1. Purchase Order Match</strong>
+                            <p style="font-size: 11px; color: var(--text-secondary);">Verify that the units, specifications, and line amounts match the issued PO document.</p>
+                        </div>
+                    </label>
+
+                    <label style="display: flex; align-items: flex-start; gap: 10px; cursor: pointer; padding: 8px; border: 1px solid var(--border-color); border-radius: var(--border-radius); background: #FFFFFF;">
+                        <input type="checkbox" id="check-gr-match" style="margin-top: 4px;" required>
+                        <div>
+                            <strong style="font-size: 13px;">2. Goods Receipt / Delivery Match</strong>
+                            <p style="font-size: 11px; color: var(--text-secondary);">Confirm that the inventory was marked as "Delivered" and received successfully by warehouse registry.</p>
+                        </div>
+                    </label>
+
+                    <label style="display: flex; align-items: flex-start; gap: 10px; cursor: pointer; padding: 8px; border: 1px solid var(--border-color); border-radius: var(--border-radius); background: #FFFFFF;">
+                        <input type="checkbox" id="check-inv-match" style="margin-top: 4px;" required>
+                        <div>
+                            <strong style="font-size: 13px;">3. Tax & Invoice Verification</strong>
+                            <p style="font-size: 11px; color: var(--text-secondary);">Check that the vendor organization details, GSTIN tax, and total values perfectly align.</p>
+                        </div>
+                    </label>
+                </div>
+
+                <div style="display: flex; justify-content: flex-end; gap: 10px;">
+                    <button type="button" class="btn-secondary" onclick="closeMatchingModal()">Cancel</button>
+                    <button type="submit" class="btn-primary" style="width: auto; padding: 10px 24px;">Approve 3-Way Match & Request Payout</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 1C. SYSTEM USER MANAGEMENT MODAL -->
+    <div class="modal-overlay" id="admin-users-modal">
+        <div class="modal-content" style="max-width: 600px;">
+            <div class="modal-header">
+                <h3>System User Registry</h3>
+                <button class="close-modal-btn" onclick="closeAdminUsersModal()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+            </div>
+            <div class="table-container" style="margin-top: 15px;">
+                <table class="custom-table">
+                    <thead>
+                        <tr>
+                            <th>User Name</th>
+                            <th>Email Address</th>
+                            <th>Designated System Role</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="admin-users-list-body">
+                        <!-- Populated dynamically via JS -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. IN-APP TOAST ALERTS -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <!-- APP CODE -->
+    <script src="app.js"></script>
+</body>
+</html>

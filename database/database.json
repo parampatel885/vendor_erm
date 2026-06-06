@@ -1,0 +1,539 @@
+{
+  "currentUserRole": "officer",
+  "currentVendorId": 1,
+  "users": [
+    {
+      "email": "officer@vendorbridge.com",
+      "password": "password123",
+      "role": "officer",
+      "name": "Jainish Patel"
+    },
+    {
+      "email": "officer2@vendorbridge.com",
+      "password": "password123",
+      "role": "officer",
+      "name": "Arjun Mehta"
+    },
+    {
+      "email": "sales@dhirajfurniture.in",
+      "password": "password123",
+      "role": "vendor",
+      "name": "Dhiraj Furniture Udyog",
+      "vendorId": 1
+    },
+    {
+      "email": "sales@aaravitsolutions.com",
+      "password": "password123",
+      "role": "vendor",
+      "name": "Aarav IT Solutions",
+      "vendorId": 2
+    },
+    {
+      "email": "sales@sharmastationery.com",
+      "password": "password123",
+      "role": "vendor",
+      "name": "Sharma Stationery Mart",
+      "vendorId": 3
+    },
+    {
+      "email": "sales@venkateshelectronics.com",
+      "password": "password123",
+      "role": "vendor",
+      "name": "Venkatesh Electronics",
+      "vendorId": 4
+    },
+    {
+      "email": "sales@patelwoodcrafts.com",
+      "password": "password123",
+      "role": "vendor",
+      "name": "Patel Woodcrafts",
+      "vendorId": 5
+    },
+    {
+      "email": "sales@guptaoffice.in",
+      "password": "password123",
+      "role": "vendor",
+      "name": "Gupta Office Systems",
+      "vendorId": 6
+    },
+    {
+      "email": "sales@tatadigital.in",
+      "password": "password123",
+      "role": "vendor",
+      "name": "Tata Digital Hub",
+      "vendorId": 7
+    },
+    {
+      "email": "approver.manager@vendorbridge.com",
+      "password": "password123",
+      "role": "manager",
+      "name": "Vikram Malhotra"
+    },
+    {
+      "email": "manager2@vendorbridge.com",
+      "password": "password123",
+      "role": "manager",
+      "name": "Ananya Iyer"
+    },
+    {
+      "email": "admin@vendorbridge.com",
+      "password": "password123",
+      "role": "admin",
+      "name": "System Admin"
+    }
+  ],
+  "vendors": [
+    {
+      "id": 1,
+      "name": "Dhiraj Furniture Udyog",
+      "category": "Furniture",
+      "gst": "27AABCF1122K1Z9",
+      "rep": "Rohan Mehta",
+      "email": "sales@dhirajfurniture.in",
+      "rating": 4.8,
+      "status": "Active",
+      "compliance": "Verified"
+    },
+    {
+      "id": 2,
+      "name": "Aarav IT Solutions",
+      "category": "IT Hardware",
+      "gst": "07AAFCC3344M2Z8",
+      "rep": "Priya Sharma",
+      "email": "sales@aaravitsolutions.com",
+      "rating": 4.7,
+      "status": "Active",
+      "compliance": "Verified"
+    },
+    {
+      "id": 3,
+      "name": "Sharma Stationery Mart",
+      "category": "Stationery",
+      "gst": "29AABCH5566N3Z7",
+      "rep": "Amit Patel",
+      "email": "sales@sharmastationery.com",
+      "rating": 4.3,
+      "status": "Active",
+      "compliance": "Verified"
+    },
+    {
+      "id": 4,
+      "name": "Venkatesh Electronics",
+      "category": "Electronics",
+      "gst": "19AABCG8899P4Z6",
+      "rep": "Rajesh Kumar",
+      "email": "sales@venkateshelectronics.com",
+      "rating": 4.5,
+      "status": "Active",
+      "compliance": "Verified"
+    },
+    {
+      "id": 5,
+      "name": "Patel Woodcrafts",
+      "category": "Furniture",
+      "gst": "27AACCC2222J1Z2",
+      "rep": "Sunita Rao",
+      "email": "sales@patelwoodcrafts.com",
+      "rating": 4.4,
+      "status": "Active",
+      "compliance": "Verified"
+    },
+    {
+      "id": 6,
+      "name": "Gupta Office Systems",
+      "category": "Furniture",
+      "gst": "09AABCG1234N1Z0",
+      "rep": "Vijay Gupta",
+      "email": "sales@guptaoffice.in",
+      "rating": 4.6,
+      "status": "Active",
+      "compliance": "Verified"
+    },
+    {
+      "id": 7,
+      "name": "Tata Digital Hub",
+      "category": "IT Hardware",
+      "gst": "27AAATT5566A1Z1",
+      "rep": "Nikhil Tata",
+      "email": "sales@tatadigital.in",
+      "rating": 4.9,
+      "status": "Active",
+      "compliance": "Verified"
+    }
+  ],
+  "rfqs": [
+    {
+      "id": "RFQ-2026-001",
+      "title": "Ergonomic Office Expansion",
+      "category": "Furniture",
+      "item": "Ergonomic Office Chairs",
+      "qty": 150,
+      "deadline": "2026-06-15",
+      "description": "Premium adjustable chairs with lumbar support and mesh backing.",
+      "status": "Approved",
+      "invitedVendors": [1, 5],
+      "recommendedQuoteId": "Q-101",
+      "dateCreated": "2026-06-01",
+      "managerRemarks": "Fits within standard Q2 budget allocations."
+    },
+    {
+      "id": "RFQ-2026-002",
+      "title": "Developer Laptop Upgrades",
+      "category": "IT Hardware",
+      "item": "Core i7 Laptops",
+      "qty": 25,
+      "deadline": "2026-06-28",
+      "description": "Modern developer laptops with minimum 16GB RAM, 512GB SSD.",
+      "status": "Bidding",
+      "invitedVendors": [2, 7],
+      "recommendedQuoteId": null,
+      "dateCreated": "2026-06-05",
+      "managerRemarks": ""
+    },
+    {
+      "id": "RFQ-2026-003",
+      "title": "Workspace Desks Setup",
+      "category": "Furniture",
+      "item": "Office Desks",
+      "qty": 50,
+      "deadline": "2026-06-30",
+      "description": "Standard office desks for local workspace.",
+      "status": "Approved",
+      "invitedVendors": [1, 5],
+      "recommendedQuoteId": "Q-103",
+      "dateCreated": "2026-06-06",
+      "managerRemarks": "Lowest quote recommended."
+    },
+    {
+      "id": "RFQ-2026-004",
+      "title": "Annual Office Stationery Mart",
+      "category": "Stationery",
+      "item": "Writing Pads & Pens",
+      "qty": 500,
+      "deadline": "2026-06-25",
+      "description": "Engraved branded corporate stationery.",
+      "status": "Approved",
+      "invitedVendors": [3],
+      "recommendedQuoteId": "Q-104",
+      "dateCreated": "2026-06-06",
+      "managerRemarks": "Approved by Treasury."
+    },
+    {
+      "id": "RFQ-2026-005",
+      "title": "Security CCTV Installation",
+      "category": "Electronics",
+      "item": "CCTV Cameras",
+      "qty": 12,
+      "deadline": "2026-06-20",
+      "description": "High definition cameras with live network feed installation.",
+      "status": "Comparison",
+      "invitedVendors": [4],
+      "recommendedQuoteId": null,
+      "dateCreated": "2026-06-06",
+      "managerRemarks": ""
+    },
+    {
+      "id": "RFQ-2026-006",
+      "title": "4K IPS Design Monitors",
+      "category": "IT Hardware",
+      "item": "Monitors",
+      "qty": 40,
+      "deadline": "2026-06-20",
+      "description": "27-inch 4K IPS monitors for design studio.",
+      "status": "Approved",
+      "invitedVendors": [2],
+      "recommendedQuoteId": "Q-106",
+      "dateCreated": "2026-06-06",
+      "managerRemarks": "Approved."
+    },
+    {
+      "id": "RFQ-2026-007",
+      "title": "Corporate Headquarters Laptops",
+      "category": "IT Hardware",
+      "item": "MacBook Pro M3",
+      "qty": 30,
+      "deadline": "2026-07-10",
+      "description": "Developer grade laptop computers. Require standard warranty.",
+      "status": "Bidding",
+      "invitedVendors": [2, 7],
+      "recommendedQuoteId": null,
+      "dateCreated": "2026-06-06",
+      "managerRemarks": ""
+    },
+    {
+      "id": "RFQ-2026-008",
+      "title": "Executive Suite Furniture",
+      "category": "Furniture",
+      "item": "Executive Desks & Chairs",
+      "qty": 10,
+      "deadline": "2026-06-25",
+      "description": "Premium leather chairs and solid mahogany wood executive desks.",
+      "status": "Approved",
+      "invitedVendors": [1, 5, 6],
+      "recommendedQuoteId": "Q-108",
+      "dateCreated": "2026-06-02",
+      "managerRemarks": "Highly critical for the new leadership workspace."
+    }
+  ],
+  "quotes": [
+    {
+      "id": "Q-101",
+      "rfqId": "RFQ-2026-001",
+      "vendorId": 1,
+      "unitPrice": 1200.0,
+      "leadTime": 10,
+      "totalVal": 180000.0,
+      "comments": "Includes 3 years warranty on gas lifts. Free delivery and assembly at venue.",
+      "dateSubmitted": "2026-06-03"
+    },
+    {
+      "id": "Q-102",
+      "rfqId": "RFQ-2026-001",
+      "vendorId": 5,
+      "unitPrice": 1350.0,
+      "leadTime": 7,
+      "totalVal": 202500.0,
+      "comments": "Lifetime warranty on metal structures. 10% discount on order.",
+      "dateSubmitted": "2026-06-04"
+    },
+    {
+      "id": "Q-103",
+      "rfqId": "RFQ-2026-003",
+      "vendorId": 1,
+      "unitPrice": 15000.0,
+      "leadTime": 12,
+      "totalVal": 750000.0,
+      "comments": "Assemble on-site. Solid hardwood frames.",
+      "dateSubmitted": "2026-06-06"
+    },
+    {
+      "id": "Q-104",
+      "rfqId": "RFQ-2026-004",
+      "vendorId": 3,
+      "unitPrice": 90.0,
+      "leadTime": 3,
+      "totalVal": 45000.0,
+      "comments": "Includes high-quality standard boxes and brand logo engraving.",
+      "dateSubmitted": "2026-06-06"
+    },
+    {
+      "id": "Q-105",
+      "rfqId": "RFQ-2026-005",
+      "vendorId": 4,
+      "unitPrice": 8000.0,
+      "leadTime": 5,
+      "totalVal": 96000.0,
+      "comments": "Includes dynamic network configuration.",
+      "dateSubmitted": "2026-06-06"
+    },
+    {
+      "id": "Q-106",
+      "rfqId": "RFQ-2026-006",
+      "vendorId": 2,
+      "unitPrice": 12000.0,
+      "leadTime": 6,
+      "totalVal": 480000.0,
+      "comments": "Premium quality panels, free HDMI cables included.",
+      "dateSubmitted": "2026-06-06"
+    },
+    {
+      "id": "Q-107",
+      "rfqId": "RFQ-2026-008",
+      "vendorId": 5,
+      "unitPrice": 80000.0,
+      "leadTime": 15,
+      "totalVal": 800000.0,
+      "comments": "Handcrafted premium wood. Standard delivery terms.",
+      "dateSubmitted": "2026-06-04"
+    },
+    {
+      "id": "Q-108",
+      "rfqId": "RFQ-2026-008",
+      "vendorId": 6,
+      "unitPrice": 75000.0,
+      "leadTime": 10,
+      "totalVal": 750000.0,
+      "comments": "Quick shipping from regional warehouse. Solid structure warranty.",
+      "dateSubmitted": "2026-06-04"
+    }
+  ],
+  "purchaseOrders": [
+    {
+      "id": "PO-2026-001",
+      "rfqId": "RFQ-2026-001",
+      "quoteId": "Q-101",
+      "vendorId": 1,
+      "subtotal": 180000.0,
+      "taxVal": 32400.0,
+      "totalVal": 212400.0,
+      "dateCreated": "2026-06-05",
+      "status": "Delivered"
+    },
+    {
+      "id": "PO-2026-002",
+      "rfqId": "RFQ-2026-003",
+      "quoteId": "Q-103",
+      "vendorId": 1,
+      "subtotal": 750000.0,
+      "taxVal": 135000.0,
+      "totalVal": 885000.0,
+      "dateCreated": "2026-06-06",
+      "status": "Sent"
+    },
+    {
+      "id": "PO-2026-003",
+      "rfqId": "RFQ-2026-004",
+      "quoteId": "Q-104",
+      "vendorId": 3,
+      "subtotal": 45000.0,
+      "taxVal": 8100.0,
+      "totalVal": 53100.0,
+      "dateCreated": "2026-06-06",
+      "status": "Delivered"
+    },
+    {
+      "id": "PO-2026-004",
+      "rfqId": "RFQ-2026-006",
+      "quoteId": "Q-106",
+      "vendorId": 2,
+      "subtotal": 480000.0,
+      "taxVal": 86400.0,
+      "totalVal": 566400.0,
+      "dateCreated": "2026-06-06",
+      "status": "Delivered"
+    },
+    {
+      "id": "PO-2026-005",
+      "rfqId": "RFQ-2026-008",
+      "quoteId": "Q-108",
+      "vendorId": 6,
+      "subtotal": 750000.0,
+      "taxVal": 135000.0,
+      "totalVal": 885000.0,
+      "dateCreated": "2026-06-05",
+      "status": "Delivered"
+    }
+  ],
+  "invoices": [
+    {
+      "id": "INV-2026-001",
+      "poId": "PO-2026-001",
+      "rfqId": "RFQ-2026-001",
+      "vendorId": 1,
+      "subtotal": 180000.0,
+      "taxVal": 32400.0,
+      "totalVal": 212400.0,
+      "dateCreated": "2026-06-05",
+      "dueDate": "2026-07-05",
+      "status": "Paid"
+    },
+    {
+      "id": "INV-2026-002",
+      "poId": "PO-2026-003",
+      "rfqId": "RFQ-2026-004",
+      "vendorId": 3,
+      "subtotal": 45000.0,
+      "taxVal": 8100.0,
+      "totalVal": 53100.0,
+      "dateCreated": "2026-06-06",
+      "dueDate": "2026-07-06",
+      "status": "Awaiting Matching"
+    },
+    {
+      "id": "INV-2026-003",
+      "poId": "PO-2026-004",
+      "rfqId": "RFQ-2026-006",
+      "vendorId": 2,
+      "subtotal": 480000.0,
+      "taxVal": 86400.0,
+      "totalVal": 566400.0,
+      "dateCreated": "2026-06-06",
+      "dueDate": "2026-07-06",
+      "status": "Pending Payment Approval"
+    },
+    {
+      "id": "INV-2026-004",
+      "poId": "PO-2026-005",
+      "rfqId": "RFQ-2026-008",
+      "vendorId": 6,
+      "subtotal": 750000.0,
+      "taxVal": 135000.0,
+      "totalVal": 885000.0,
+      "dateCreated": "2026-06-05",
+      "dueDate": "2026-07-05",
+      "status": "Awaiting Matching"
+    }
+  ],
+  "activities": [
+    {
+      "id": 1,
+      "type": "po",
+      "user": "Jainish Patel",
+      "title": "AP Matched Invoice INV-2026-003",
+      "details": "Three-way match completed for INV-2026-003. Total value: ₹5,66,400.00. Forwarded to Finance Manager.",
+      "timestamp": "2026-06-06 14:03"
+    },
+    {
+      "id": 2,
+      "type": "quote",
+      "user": "Aarav IT Solutions",
+      "title": "Invoice INV-2026-003 Raised",
+      "details": "Tax Invoice for ₹5,66,400.00 submitted against PO-2026-004.",
+      "timestamp": "2026-06-06 13:45"
+    },
+    {
+      "id": 3,
+      "type": "approve",
+      "user": "Vikram Malhotra",
+      "title": "Reconciled Invoice INV-2026-001",
+      "details": "Approved payout worth ₹2,12,400.00 to Dhiraj Furniture Udyog.",
+      "timestamp": "2026-06-06 12:10"
+    },
+    {
+      "id": 4,
+      "type": "po",
+      "user": "Jainish Patel",
+      "title": "Purchase Order PO-2026-002 Issued",
+      "details": "Contract for ₹8,85,000.00 dispatched to Dhiraj Furniture Udyog.",
+      "timestamp": "2026-06-06 11:30"
+    },
+    {
+      "id": 5,
+      "type": "create",
+      "user": "System Admin",
+      "title": "Registered new vendor: Gupta Office Systems",
+      "details": "Compliance verification verified successfully for GSTIN 09AABCG1234N1Z0",
+      "timestamp": "2026-06-05 10:15"
+    }
+  ],
+  "notifications": [
+    {
+      "id": 1,
+      "read": false,
+      "title": "Procurement Reconciler Required",
+      "details": "Invoice INV-2026-002 from Sharma Stationery Mart requires three-way matching.",
+      "timestamp": "Just now"
+    },
+    {
+      "id": 2,
+      "read": false,
+      "title": "Payout Approval Required",
+      "details": "Invoice INV-2026-003 for ₹5,66,400.00 is ready for Manager signoff.",
+      "timestamp": "Just now"
+    },
+    {
+      "id": 3,
+      "read": false,
+      "title": "RFQ Invitation Received",
+      "details": "Venkatesh Electronics invited to bid on RFQ-2026-005 Security CCTV Installation.",
+      "timestamp": "Just now"
+    },
+    {
+      "id": 4,
+      "read": false,
+      "title": "Invoice Reconciler Required",
+      "details": "Invoice INV-2026-004 from Gupta Office Systems requires three-way matching.",
+      "timestamp": "Just now"
+    }
+  ]
+}
