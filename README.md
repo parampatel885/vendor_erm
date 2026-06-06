@@ -67,6 +67,6 @@ The dashboard includes a role selector for testing. The following accounts are p
 - **Three-Way Invoice Matching**: Automatically flags mismatches between the RFQ, Purchase Order, and Vendor Invoice values.
 - **SMTP Alerts with Outbox Fallback**: Sends email alerts when actions are completed. If SMTP settings in the `.env` file are invalid or missing, emails are saved locally inside the `outbox` directory.
 
-## Demo Videohttps://youtu.be/5q_gqYn2gos?si=tLPhraE4a06GyKJg
+## Demo Video
 
 🎥 YouTube Demo: https://youtu.be/5q_gqYn2gos?si=tLPhraE4a06GyKJg
