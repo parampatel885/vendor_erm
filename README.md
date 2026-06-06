@@ -69,4 +69,4 @@ The dashboard includes a role selector for testing. The following accounts are p
 
 ## Demo Video
 
-🎥 YouTube Demo: https://youtu.be/5q_gqYn2gos?si=tLPhraE4a06GyKJg
+YouTube Demo: https://youtu.be/5q_gqYn2gos?si=tLPhraE4a06GyKJg
