@@ -1,10 +1,12 @@
-<img src="assets/vendor-flow.png" alt="Vendor Workflow" width="600"/>
+
 
 <a href="https://youtu.be/5q_gqYn2gos?si=tLPhraE4a06GyKJg" target="_blank">    
-    <img src="assets/vendor-flow.png" alt="Watch VendorBridge Demo Video" width="600"/>
+    <img src="assets/Vendor Bridge.png" alt="Watch VendorBridge Demo Video" width="600"/>
 </a>
 
-Click the above youtube link to see the demo!!!!
+Click the above image to see the demo video.
+
+<img src="assets/vendor-flow.png" alt="Vendor Workflow" width="600"/>
 
 # VendorBridge - Procurement & Vendor Management ERP
 
