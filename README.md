@@ -1,5 +1,11 @@
 <img src="assets/vendor-flow.png" alt="Vendor Workflow" width="600"/>
 
+<a href="https://youtu.be/5q_gqYn2gos?si=tLPhraE4a06GyKJg" target="_blank">    
+    <img src="assets/vendor-flow.png" alt="Watch VendorBridge Demo Video" width="600"/>
+</a>
+
+Click the above youtube link to see the demo!!!!
+
 # VendorBridge - Procurement & Vendor Management ERP
 
 VendorBridge is a full-stack procurement portal designed to manage the Request for Quote (RFQ) process, vendor bidding, purchase orders, and invoice reconciliation.
